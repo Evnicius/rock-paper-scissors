@@ -75,9 +75,15 @@ function rpsPlay(moveComputer, movePlayer)
 function game() {
     let scorePlayer = 0;
     let scoreComputer = 0;
-
-    for (let i = 0; i < 5; i++)
+    
+    while((scorePlayer < 3))
     {
+        if (scoreComputer >= 3)
+        {
+            break;
+        }
+
+        console.log("Player points: " + scorePlayer + " Computer points: " + scoreComputer);
         let moveComputer = computerPlay();
         let movePlayer = playerSelection();
         let rpsOutcome = rpsPlay(moveComputer, movePlayer);
@@ -91,15 +97,11 @@ function game() {
         {
             scoreComputer++;
         }
-        else if (rpsOutcome == "DRAW!")
-        {
-            i--;
-        }
 
-        console.log(i);
         console.log("\nComputer picks " + moveComputer);
         console.log("\nPlayer picks " + movePlayer);
-        console.log("Player points: " + scorePlayer + " Computer points: " + scoreComputer);
+        
+
     }
 
     return (scorePlayer === 3 ? "PLAYER HAS WON THE BO5" : "PLAYER HAS LOST THE BO5");
