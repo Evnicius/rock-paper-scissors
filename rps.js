@@ -134,7 +134,7 @@ function scoreTally(result, moveComputerText)
         containerScoreboard.textContent = `PLAYER: ${scorePlayer}\
         - COMPUTER: ${scoreComputer}`;
     }
-    containerComputerMove.textContent = `COMPUTERS PLAYS ${moveComputerText.toUpperCase()}`;
+    containerComputerMove.textContent = `COMPUTER PLAYS ${moveComputerText.toUpperCase()}`;
     body.appendChild(containerComputerMove);
     body.appendChild(containerScoreboard); 
 }
