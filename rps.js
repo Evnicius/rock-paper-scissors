@@ -73,16 +73,22 @@ function rpsPlay(moveComputer, movePlayer)
 const body = document.querySelector('body'); 
 const listenButtons  = document.querySelectorAll('button');
 
+const header = document.createElement("h2");
+const header2 = document.createElement("h3");
 const buttonRock = document.createElement("button");
 const buttonPaper = document.createElement("button");
 const buttonScissors = document.createElement("button");
+const containerComputerMove = document.createElement("div");
 const containerButtons = document.createElement("div");
 const containerScoreboard = document.createElement("div");
 const containerResult = document.createElement("div");
 const containerFirstTo5 = document.createElement("div");
 const buttonNewGame = document.createElement("button");
 
-
+header.textContent = "ROCK PAPER SCISSORS";
+header2.textContent = "First to five!";
+body.appendChild(header);
+body.appendChild(header2);
 
 buttonRock.textContent = "ROCK";
 buttonPaper.textContent = "PAPER";
@@ -114,7 +120,7 @@ function printResult(result)
 
 let scorePlayer = 0;
 let scoreComputer = 0;
-function scoreTally(result)
+function scoreTally(result, moveComputerText)
 {
     if (result == "VICTORY!")
     {
@@ -128,7 +134,8 @@ function scoreTally(result)
         containerScoreboard.textContent = `PLAYER: ${scorePlayer}\
         - COMPUTER: ${scoreComputer}`;
     }
-
+    containerComputerMove.textContent = `COMPUTERS PLAYS ${moveComputerText.toUpperCase()}`;
+    body.appendChild(containerComputerMove);
     body.appendChild(containerScoreboard); 
 }
 
@@ -148,7 +155,7 @@ function checkScore(scoreComputer, scorePlayer)
     }
 }
 
-function descriptionResults(result)
+function descriptionResults(result, moveComputerText)
 {
     // if (scoreComputer == 5 || scorePlayer == 5)
     // {
@@ -158,7 +165,7 @@ function descriptionResults(result)
     //     // containerResult.remove();
     //     body.appendChild(buttonNewGame);
     // }
-    scoreTally(result);
+    scoreTally(result, moveComputerText);
     printResult(result);
     checkScore(scoreComputer, scorePlayer);
 }
@@ -175,18 +182,21 @@ function cleanUp()
     }
 }
 buttonRock.addEventListener('click', () => {
-    let result = rpsPlay(computerPlay(), "rock");
-    descriptionResults(result);
+    let moveComputerText = computerPlay();
+    let result = rpsPlay(moveComputerText, "rock");
+    descriptionResults(result, moveComputerText);
     cleanUp();
 });
 buttonPaper.addEventListener('click', () => {
-    let result = rpsPlay(computerPlay(), "paper");
-    descriptionResults(result);
+    let moveComputerText = computerPlay();
+    let result = rpsPlay(moveComputerText, "paper");
+    descriptionResults(result, moveComputerText);
     cleanUp();
 });
 buttonScissors.addEventListener('click', () => {
-    let result = rpsPlay(computerPlay(), "scissors");
-    descriptionResults(result);
+    let moveComputerText = computerPlay();
+    let result = rpsPlay(moveComputerText, "scissors");
+    descriptionResults(result, moveComputerText);
     cleanUp();
 });
 
@@ -199,6 +209,7 @@ buttonNewGame.addEventListener('click', () => {
     containerFirstTo5.remove();
     containerResult.remove();
     containerScoreboard.remove();
+    containerComputerMove.remove();
     buttonNewGame.remove();
 });
 
